@@ -1,3 +1,7 @@
+**tinky-progress-bar**
+
+---
+
 # tinky-progress-bar
 
 A customizable progress bar component for [Tinky](https://github.com/ByteLandTechnology/tinky) applications.
