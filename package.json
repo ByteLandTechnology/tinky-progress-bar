@@ -1,6 +1,6 @@
 {
   "name": "tinky-progress-bar",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A customizable progress bar component for Tinky applications.",
   "keywords": [
     "react",
