@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/ByteLandTechnology/tinky-progress-bar/compare/v1.0.0...v1.1.0) (2026-02-12)
+
+### ✨ Features
+
+- use tinky-figures defaults for progress bar characters ([2a6ac8a](https://github.com/ByteLandTechnology/tinky-progress-bar/commit/2a6ac8a90b0e128e51f56d3f19fb31544b94accf))
+
 ## 1.0.0 (2026-02-10)
 
 ### ✨ Features
