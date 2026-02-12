@@ -2,17 +2,16 @@ import type { ComponentTheme } from "tinky-theme";
 import type { BoxProps, TextProps } from "tinky";
 import type { ProgressBarProps } from "../components/ProgressBar.js";
 
-const CHARS = {
-  square: "■",
-  squareLightShade: "░",
-};
+export interface ProgressBarThemeConfig extends Record<string, unknown> {
+  readonly completedCharacter?: string;
+  readonly remainingCharacter?: string;
+}
 
 /**
  * Default theme for the ProgressBar component.
- * Includes styles for container, completed part, and remaining part,
- * as well as configuration for characters used.
+ * Includes styles for container, completed part, and remaining part.
  */
-const progressBarTheme: ComponentTheme<ProgressBarProps> = {
+export const progressBarTheme: ComponentTheme<ProgressBarProps> = {
   styles: {
     container: (): BoxProps => ({
       flexGrow: 1,
@@ -25,15 +24,8 @@ const progressBarTheme: ComponentTheme<ProgressBarProps> = {
       dimColor: true,
     }),
   },
-  config: (): {
-    completedCharacter: string;
-    remainingCharacter: string;
-  } => ({
-    completedCharacter: CHARS.square,
-    remainingCharacter: CHARS.squareLightShade,
-  }),
+  config: (): ProgressBarThemeConfig => ({}),
 };
 
-export default progressBarTheme;
 export type ProgressBarTheme = typeof progressBarTheme;
 export type ProgressBarThemeProps = ProgressBarProps;

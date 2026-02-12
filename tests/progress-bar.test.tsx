@@ -2,12 +2,9 @@ import { describe, test, expect } from "vitest";
 import { Box } from "tinky";
 import { render } from "tinky-test";
 import { dim, magenta } from "ansis";
+import { unicodeFigures } from "tinky-figures";
+import { ThemeProvider } from "tinky-theme";
 import { ProgressBar } from "../src/index.js";
-
-const CHARS = {
-  square: "■",
-  squareLightShade: "░",
-};
 
 describe("ProgressBar", () => {
   test("renders empty progress bar at 0%", () => {
@@ -17,7 +14,7 @@ describe("ProgressBar", () => {
       </Box>,
     );
 
-    expect(lastFrame()).toBe(dim(CHARS.squareLightShade.repeat(20)));
+    expect(lastFrame()).toBe(dim(unicodeFigures.squareLightShade.repeat(20)));
   });
 
   test("renders half-filled progress bar at 50%", () => {
@@ -34,7 +31,8 @@ describe("ProgressBar", () => {
     );
 
     expect(lastFrame()).toBe(
-      magenta(CHARS.square.repeat(10)) + dim(CHARS.squareLightShade.repeat(10)),
+      magenta(unicodeFigures.square.repeat(10)) +
+        dim(unicodeFigures.squareLightShade.repeat(10)),
     );
   });
 
@@ -46,7 +44,7 @@ describe("ProgressBar", () => {
     );
 
     // Should render empty bar (clamped to 0)
-    expect(lastFrame()).toBe(dim(CHARS.squareLightShade.repeat(10)));
+    expect(lastFrame()).toBe(dim(unicodeFigures.squareLightShade.repeat(10)));
   });
 
   test("value at 100% renders full bar", () => {
@@ -56,6 +54,29 @@ describe("ProgressBar", () => {
       </Box>,
     );
 
-    expect(lastFrame()).toBe(magenta(CHARS.square.repeat(10)));
+    expect(lastFrame()).toBe(magenta(unicodeFigures.square.repeat(10)));
+  });
+
+  test("uses custom characters from theme config", () => {
+    const { lastFrame } = render(
+      <ThemeProvider
+        theme={{
+          components: {
+            ProgressBar: {
+              config: {
+                completedCharacter: "=",
+                remainingCharacter: "-",
+              },
+            },
+          },
+        }}
+      >
+        <Box width={10}>
+          <ProgressBar value={50} />
+        </Box>
+      </ThemeProvider>,
+    );
+
+    expect(lastFrame()).toBe(magenta("=".repeat(5)) + dim("-".repeat(5)));
   });
 });

@@ -10,10 +10,12 @@ Exports the ProgressBar component and its theme.
 ## Interfaces
 
 - [ProgressBarProps](interfaces/ProgressBarProps.md)
+- [ProgressBarThemeConfig](interfaces/ProgressBarThemeConfig.md)
 
 ## Type Aliases
 
 - [ProgressBarTheme](type-aliases/ProgressBarTheme.md)
+- [ProgressBarThemeProps](type-aliases/ProgressBarThemeProps.md)
 
 ## Variables
 

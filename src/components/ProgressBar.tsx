@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { Box, type DOMElement, Text, measureElement } from "tinky";
 import { useComponentTheme } from "tinky-theme";
-import progressBarTheme from "../themes/progress-bar-theme.js";
+import { useFigures } from "tinky-figures";
+import {
+  progressBarTheme,
+  type ProgressBarThemeConfig,
+} from "../themes/progress-bar-theme.js";
 
 /**
  * Props for the ProgressBar component.
@@ -30,6 +34,7 @@ export interface ProgressBarProps {
  */
 export function ProgressBar(props: ProgressBarProps) {
   const { value } = props;
+  const { square, squareLightShade } = useFigures();
   const [width, setWidth] = useState(0);
 
   // Ref to the container element
@@ -55,24 +60,24 @@ export function ProgressBar(props: ProgressBarProps) {
     props,
   );
 
-  // Resolve config (it could be a function)
-  const configValue = typeof config === "function" ? config(props) : config;
+  const configValue = (
+    typeof config === "function" ? config(props) : config
+  ) as ProgressBarThemeConfig | undefined;
+  const completedBarCharacter = configValue?.completedCharacter ?? square;
+  const remainingBarCharacter =
+    configValue?.remainingCharacter ?? squareLightShade;
 
   return (
     <Box ref={setRef} {...styles.container}>
       {complete > 0 && (
         <Text {...styles.completed}>
-          {(configValue?.completedCharacter as string | undefined)?.repeat(
-            complete,
-          )}
+          {completedBarCharacter.repeat(complete)}
         </Text>
       )}
 
       {remaining > 0 && (
         <Text {...styles.remaining}>
-          {(configValue?.remainingCharacter as string | undefined)?.repeat(
-            remaining,
-          )}
+          {remainingBarCharacter.repeat(remaining)}
         </Text>
       )}
     </Box>

@@ -5,9 +5,15 @@
  */
 
 // Export components
-export { ProgressBar } from "./components/ProgressBar.js";
-export type { ProgressBarProps } from "./components/ProgressBar.js";
+export {
+  ProgressBar,
+  type ProgressBarProps,
+} from "./components/ProgressBar.js";
 
 // Export theme
-export { default as progressBarTheme } from "./themes/progress-bar-theme.js";
-export type { ProgressBarTheme } from "./themes/progress-bar-theme.js";
+export {
+  progressBarTheme,
+  type ProgressBarTheme,
+  type ProgressBarThemeProps,
+  type ProgressBarThemeConfig,
+} from "./themes/progress-bar-theme.js";
